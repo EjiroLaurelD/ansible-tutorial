@@ -4,15 +4,12 @@
   become: true
   tasks:
 
-          - name: update repository index
-            apt:
-                    update_cache: yes
-
-          - name: install apache2 package
-            apt:
-                    name: apache2
-
-          - name: add php support for apache
-            apt:
-                    name: libapache2-mod-php
+          - name: install apache2, php support and update repository index
+            apt:    
+                    name:
+                            - "{{ apache_package }}"
+                            - "{{ php_package }}"                              
                     state: latest
+                    update_cache: yes
+                                          #variable was declared in the inventory file. Also note that after variable decalration in the case where you have mre than one linux distro youre automating , you use the keyword PACKAGE in place of apt and it will work for all                             
+                                          #package is a genereic os manager. check ansible documentation to read more
