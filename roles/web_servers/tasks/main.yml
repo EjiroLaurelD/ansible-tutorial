@@ -11,31 +11,13 @@
                             - apache2
                             - libapache2-mod-php
                             - mariadb-server
-                            - unzip  
                                                         
                     state: latest
                     update_cache: yes
             changed_when: false
             when: ansible_distribution == "Ubuntu" #you add this line incase you have more than one distro running
-         
-          - name: install terraform
-            unarchive:
-                    src: https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip
-                    dest: /usr/local/bin
-                    remote_src: yes
-                    mode: 0755
-                    owner: root
-                    group: root
 
-          - name: copy html file for site
-            tags: apache2
-            copy:
-                    src: default_site.html
-                    dest: /var/www/html/index.html
-                    owner: root
-                    group: root
-                    mode: 0644
-             
+          
           - name: create user jirex
             tags: always
             user:
